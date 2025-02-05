@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/PostController.php
-
 namespace App\Http\Controllers;
 
 use App\Models\Post;
@@ -9,14 +7,12 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Post::paginate(10); // Return paginated posts
-    }
+        // Mengambil data dengan pagination, 10 item per halaman
+        $posts = Post::paginate(10);
 
-    public function store(Request $request)
-    {
-        $post = Post::create($request->all());
-        return response()->json($post, 201);
+        // Mengembalikan data dalam bentuk JSON dengan informasi pagination
+        return response()->json($posts);
     }
 }
